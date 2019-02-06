@@ -1,0 +1,14 @@
+<h1>Create New Subject</h1>
+
+<form action="<%= subs_url %>" method="post">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+  
+<label>Title
+   <input type="text" name="sub[title]" value="">
+</label>
+
+<label>Description
+  <textarea name="sub[description]"></textarea>
+</label>
+<input type="submit" value="Create Subject">
+</form>

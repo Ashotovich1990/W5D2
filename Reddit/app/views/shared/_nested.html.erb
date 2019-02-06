@@ -1,0 +1,22 @@
+<h4>Comment By: <%= comment.author.username%></h4>
+
+<p><%= comment.content%></p>
+
+
+<form action="<%= comments_url %>" method="post">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+  <input type="hidden" name="comment[post_id]" value="<%= params[:id]%>">
+  <input type="hidden" name="comment[parent_comment_id]" value="<%= comment.id %>">
+  <label>Comment on Post
+    <textarea name="comment[content]"></textarea>
+  </label>
+  <input type="submit" value="Reply">
+</form>
+
+
+
+<h4>Replies</h4>
+ <% comment.child_comments.each do |comment| %>
+   <h5>Comment By: <%= comment.author.username%></h5>
+   <h5><a href="<%= comment_url(comment)%>">Open the Comment</a></h5>
+ <% end %> 

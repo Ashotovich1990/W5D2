@@ -1,0 +1,35 @@
+<h2><%= @post.title %></h2>
+
+<h3><%= @post.url %></h3>
+
+<h4><%= @post.content %></h4>
+
+<h4>By: <%= @post.author.username %></h4>
+
+<% @post.subs.each do |sub| %>
+  <h4><a href="<%= sub_url(sub)%>"> Back to <%= sub.title %></a></h4>
+<% end %>
+
+
+<form action="<%= post_url(@post)%>" method="post">Remove Post
+ <input type="hidden" name="_method" value="delete">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+  <input type="submit" value="Remove Post">
+</form>
+
+<h3>Comments</h3>
+<form action="<%= comments_url %>" method="post">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+  <input type="hidden" name="comment[post_id]" value="<%= params[:id]%>">
+  <input type="hidden" name="comment[parent_comment_id]" value="">
+  <label>Comment on Post
+    <textarea name="comment[content]"></textarea>
+  </label>
+  <input type="submit" value="Add Comment">
+</form>
+
+<% @post.comments.each do |comment| %>
+  <ul>
+    <li>  <%= comment.content %></li>
+  </ul>
+<% end %>

@@ -1,0 +1,26 @@
+<h1>Update Post</h1>
+
+<form action="<%= post_url(@post) %>" method="post">
+ <input type="hidden" name="_method" value="patch">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+  
+<label>Title
+   <input type="text" name="post[title]" value="<%= @post.title %>">
+</label>
+
+<label>Url
+   <input type="text" name="post[url]" value="<%= @post.url %>">
+</label>
+
+<select name="post[sub_id]">Subject
+    <% @subjects.each do |subject| %>
+      <option value="<%= subject.id%>"><%= subject.title%></option>
+    <% end %>
+</select>
+
+<label>Content
+  <textarea name="post[content]"><%= @post.content %></textarea>
+</label>
+
+<input type="submit" value="Update Post">
+</form>
